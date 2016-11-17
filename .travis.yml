@@ -31,9 +31,6 @@ before_deploy:
 - ./rancher-compose -p lesloupsgourmands-prod -f docker-compose.yml -r rancher-compose.yml -e prod.env up -d
 deploy:
   provider: releases
-  api_key:
-    secure: yQO10yfx1a0c+lvgVDnynQk8UUTDugdUdPHxuFUqK0kZIeg+pUNNK22IPbbhv9Ua+G/b3uASv02cZJcKW/B51HbT6jvGDoAZ32Y10MnRIlqfMKQB5ZpIOqz57KaRLnBOl7Twenio27NMeCcPl7L/1wh7DxyJPMnMv8hbg4p4QOm0Twdgt1U6B2ctfD3/6A5rruUcOIoqzDJb61uXZU4WoXaeg9WksFRP8hv7y14gEgKXsA7B3zBYMPq6jDyMEnvQdWpkSGinP5xb1rNjACBAhvcrwXNZzYV8wz+rMcd07h3wfReaMmuJkRqoXV3hZrQkSkal6RmiRtjROYvfs1J5l1RBZVKdw038wbFB5dH/UbMlkn0rsXCYOgnvOC7h1D8micgkR4/V9BC/qiznpiA4CndqvjhYXIW4TjHGS30MxigTBNi9fs0OlHyZTJYzPzf930XY4IUXcBX5VnX9k23ZBfrU0kBasBSvQs+4mv9jwAK8NDGdm9I526TziKi4o9WnzACC2CFVNRe+GGTpVBcxvdHa11es6dUbesWWEU022D1cSg+8FI0bKZ62z8CJ/6iylayQbMCGStIUrQ0fY/IYa100ZUDIxjfJFRQUQx0dYCLEn4FGnEYBagIFLhUVB0qhX7j/p4XfcY+T2YtMzuz9574/mAkzY7fm+ovPXExqHCQ=
-  file: lesloupsgourmands.zip
   skip_cleanup: true
   on:
     tags: true
