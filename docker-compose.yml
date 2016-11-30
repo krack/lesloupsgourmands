@@ -4,6 +4,8 @@ load-balancer:
   image: rancher/load-balancer-service
   links:
   - web:web
+  labels:
+    proxy_url: ${EXPOSE_URL}
 web:
   labels:
     io.rancher.container.pull_image: always
