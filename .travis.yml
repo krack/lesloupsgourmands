@@ -5,10 +5,8 @@ services:
 node_js:
 - node
 before_install:
-- curl -L http://releases.rancher.com/compose/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz
-  -o rancher-compose.tar.gz
-- tar -zxvf rancher-compose.tar.gz && mv ./rancher-compose-v0.8.6/rancher-compose
-  ./rancher-compose && rm -fr ./rancher-compose-v0.8.6 && rm ./rancher-compose.tar.gz
+- curl -L https://releases.rancher.com/compose/v0.12.1/rancher-compose-linux-amd64-v0.12.1.tar.gz -o rancher-compose.tar.gz
+- tar -zxvf rancher-compose.tar.gz && mv ./rancher-compose-v0.12.1/rancher-compose ./rancher-compose && rm -fr ./rancher-compose-v0.12.1 && rm ./rancher-compose.tar.gz
 - npm install -g gulp
 - npm install -g bower
 install:
@@ -20,10 +18,8 @@ after_success:
 - docker build -t krack/lesloupsgourmands:test .
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 - docker push krack/lesloupsgourmands:test
-- "./rancher-compose -p lesloupsgourmands-dev -f docker-compose.yml -r rancher-compose.yml
-  rm -f"
-- "./rancher-compose -p lesloupsgourmands-dev -f docker-compose.yml -r rancher-compose.yml
-  -e dev.env up -d"
+- "./rancher-compose -p lesloupsgourmands-dev -f docker-compose.yml -r rancher-compose.yml -e dev.env rm -f"
+- "./rancher-compose -p lesloupsgourmands-dev -f docker-compose.yml -r rancher-compose.yml -e dev.env up -d"
 before_deploy:
 - cd dist && zip -ro ../lesloupsgourmands.zip * && cd ..
 - docker tag krack/lesloupsgourmands:test krack/lesloupsgourmands:${TRAVIS_TAG}
@@ -31,10 +27,8 @@ before_deploy:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 - docker push krack/lesloupsgourmands:${TRAVIS_TAG}
 - docker push krack/lesloupsgourmands:latest
-- "./rancher-compose -p lesloupsgourmands-prod -f docker-compose.yml -r rancher-compose.yml
-  rm -f"
-- "./rancher-compose -p lesloupsgourmands-prod -f docker-compose.yml -r rancher-compose.yml
-  -e prod.env up -d"
+- "./rancher-compose -p lesloupsgourmands-prod -f docker-compose.yml -r rancher-compose.yml -e prod.env rm -f"
+- "./rancher-compose -p lesloupsgourmands-prod -f docker-compose.yml -r rancher-compose.yml -e prod.env up -d"
 deploy:
   provider: releases
   api_key:
